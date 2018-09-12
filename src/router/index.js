@@ -11,13 +11,23 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'HelloWorld',
+      name: 'dashboard',
       component: Dashboard
     },
     {
-      path: '/',
-      name: 'HelloWorld',
+      path: '/new',
+      name: 'new-employe',
       component: NewEmployee
+    },
+    {
+      path: '/edit/:employeeId',
+      name: 'edit-employe',
+      component: EditEmployee
+    },
+    {
+      path: '/:employeeId',
+      name: 'view-employe',
+      component: ViewEmployee
     }
   ]
 })
