@@ -1,6 +1,22 @@
 <template>
     <div id="dashboard">
-        <h3>Dashboard</h3>
+        <ul class="collection with-header">
+            <li class="collection-header">
+                <h4>Employees </h4>
+            </li>
+
+            <li v-for="employee in employees" v-bind:key="employee.id" class="collection-item">
+            <div class="chip">
+                {{employee.dept}}
+            </div>
+            {{employee.employeeId}}:  {{employee.name}}
+
+
+            <router-link class="secondary-content" v-bind:to="{name: 'view-employee', params: {employeeId: employee.employeeId}}">
+                <i class="fa fa-eye"></i>
+            </router-link>
+            </li>
+        </ul>
 
         <div class="fixed-action-btn">
             <router-link to="/new" class="btn-floating btn-large red">
@@ -19,17 +35,22 @@ export default {
     name: "dashboard",
     data () {
         return {
-            employess: []
+            employees: []
         }
     },
     created () {
-        db.collection('employees').get()
+        db.collection('employees').orderBy('dept').get()
         .then(querySnapShoot => {
             querySnapShoot.forEach(doc => {
                 console.log(doc.data())
                 const data = {
-                    doc
+                    id: doc.data().id,
+                    employeeId: doc.data().employeeId,
+                    name: doc.data().name,
+                    position: doc.data().position,
+                    dept: doc.data().dept
                 }
+                this.employees.push(data)
             });
         })
     }

@@ -16,17 +16,17 @@ export default new Router({
     },
     {
       path: '/new',
-      name: 'new-employe',
+      name: 'new-employee',
       component: NewEmployee
     },
     {
       path: '/edit/:employeeId',
-      name: 'edit-employe',
+      name: 'edit-employee',
       component: EditEmployee
     },
     {
       path: '/:employeeId',
-      name: 'view-employe',
+      name: 'view-employee',
       component: ViewEmployee
     }
   ]
